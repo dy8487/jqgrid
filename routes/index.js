@@ -18,7 +18,7 @@ exports.griddata = function(req, res){
 		for(var i=0; i<zipArray.length; i++){
 			var zipData = zipArray[i].split("\t");
 			result.push({
-				zipcod: zipData[0],
+				zipcode: zipData[0],
 				sido: zipData[1],
 				gugun: zipData[2],
 				dong: zipData[3],
