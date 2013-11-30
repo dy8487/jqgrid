@@ -11,11 +11,17 @@ exports.forward = function(req, res){
 };
 
 exports.griddata = function(req, res){
+	
+	var rows = parseInt(req.query.rows);
+	var page = parseInt(req.query.page);
+	
+	var startNum = rows * (page-1); //시작점 (1page:0, 2page:10, 3page:20)
+	
 	fs.readFile("zipcode.txt", function(err, data) {
 		
 		var result = [];
 		var zipArray = data.toString().split("\n");
-		for(var i=0; i<zipArray.length; i++){
+		for(var i=startNum; i<startNum+rows && i<zipArray.length; i++){ //마지막일 경우 딱떨어지지 않음
 			var zipData = zipArray[i].split("\t");
 			result.push({
 				zipcode: zipData[0],
@@ -28,7 +34,12 @@ exports.griddata = function(req, res){
 				seq: zipData[7]
 			});
 		}
-		res.json(result);
+		result.total = result.length;
+		res.json({
+			records : zipArray.length,
+			total: zipArray.length / rows + 1,
+			rows: result
+		});
 		
 	});
 };
