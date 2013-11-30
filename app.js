@@ -29,7 +29,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/jqgrid.html', routes.forward);
-app.get('/axisj.html', routes.forward);
+app.get('/axijs.html', routes.forward);
+app.get('/griddata', routes.griddata);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

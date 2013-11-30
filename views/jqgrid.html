@@ -16,6 +16,38 @@
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		
+		<link rel="stylesheet" type="text/css" href="stylesheets/ui-lightness/jquery-ui-1.10.3.custom.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/ui.jqgrid.css">
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.jqGrid.src.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				jQuery("#list2").jqGrid({
+			   	url:'griddata',
+				datatype: "json",
+			   	colNames:['우편번호','시도', '구군', '동', '리', '빌딩', '번지','번호'],
+			   	colModel:[
+			   		{name:'zipcode',index:'zipcode', width:55},
+			   		{name:'sido',index:'sido', width:90},
+			   		{name:'gugun',index:'gugun', width:90, align:"right"},
+			   		{name:'dong',index:'dong', width:100},
+			   		{name:'ri',index:'ri', width:100, align:"right"},
+			   		{name:'building',index:'building', width:80, align:"right"},
+			   		{name:'bunji',index:'bunji', width:80, align:"right"},
+			   		{name:'seq',index:'seq', width:80, align:"center", sortable:false}
+			   	],
+			   	rowNum:10,
+			   	rowList:[10,20,30],
+			   	pager: '#pager1',
+			   	sortname: 'sido',
+			    viewrecords: true,
+			    sortorder: "desc",
+			    caption:"우편번호"
+			});
+			jQuery("#list2").jqGrid('navGrid','#pager2',{edit:false,add:false,del:false});
+			});
+		</script>
 	</head>
 
 	<body>
@@ -33,7 +65,8 @@
 			</nav>
 
 			<div>
-
+				<table id="list2"></table>
+				<div id="pager2"></div>
 			</div>
 
 			<footer>
